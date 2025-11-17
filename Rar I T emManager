@@ -1,0 +1,27 @@
+// RareItemManager.cs
+using System;
+
+public class RareItemManager
+{
+    public Random rnd = new Random();
+    public string[] rareItems = { "Sword of Glory", "Shield of Dawn", "Amulet of Strength", "Helmet of Legends" };
+    public double dropChance = 0.5; // 50% فرصة الحصول على القطع
+
+    // محاولة الحصول على قطعة نادرة
+    public void TryGetRareItem()
+    {
+        if (rnd.NextDouble() <= dropChance)
+        {
+            int idx = rnd.Next(rareItems.Length);
+            Console.WriteLine($"Congratulations! You received: {rareItems[idx]}");
+        }
+        else
+        {
+            Console.WriteLine("No rare item this time. Keep playing!");
+        }
+    }
+
+    // Developer Mode: يمنح جميع القطع النادرة
+    public void GiveAllRareItemsDev()
+    {
+        Console.WriteLine("[Dev
