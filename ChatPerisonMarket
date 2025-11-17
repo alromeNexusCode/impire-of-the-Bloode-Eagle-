@@ -1,0 +1,67 @@
+// ChatPrisonMarket.cs
+using System;
+using System.Collections.Generic;
+
+// الشات داخل اللعبة
+public class ChatManager
+{
+    public List<string> globalChat = new List<string>();
+    public List<string> allianceChat = new List<string>();
+
+    public void SendGlobalMessage(string player, string message)
+    {
+        globalChat.Add($"{player}: {message}");
+        Console.WriteLine($"[Global] {player}: {message}");
+    }
+
+    public void SendAllianceMessage(string player, string alliance, string message)
+    {
+        allianceChat.Add($"{alliance}-{player}: {message}");
+        Console.WriteLine($"[Alliance {alliance}] {player}: {message}");
+    }
+}
+
+// السجن
+public class PrisonManager
+{
+    public int prisonCapacity = 100;
+    public List<string> prisoners = new List<string>();
+
+    public void Imprison(string player)
+    {
+        if (prisoners.Count < prisonCapacity)
+        {
+            prisoners.Add(player);
+            Console.WriteLine($"{player} sent to prison!");
+        }
+        else
+        {
+            Console.WriteLine("Prison full!");
+        }
+    }
+
+    public void Release(string player)
+    {
+        if (prisoners.Contains(player))
+        {
+            prisoners.Remove(player);
+            Console.WriteLine($"{player} released from prison.");
+        }
+    }
+}
+
+// السوق والتجارة
+public class MarketManager
+{
+    public Dictionary<string, int> marketResources = new Dictionary<string, int>();
+
+    public void AddPlayer(string playerName)
+    {
+        Console.WriteLine($"{playerName} joined the market.");
+    }
+
+    public void TradeResourcesDev(string fromPlayer, string toPlayer, string resource, int amount)
+    {
+        Console.WriteLine($"[DevMode] {fromPlayer} trades {amount} {resource} to {toPlayer}.");
+    }
+}
