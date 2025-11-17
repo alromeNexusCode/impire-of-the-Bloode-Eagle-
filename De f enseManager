@@ -1,0 +1,64 @@
+// DefenseManager.cs
+using System;
+
+public class DefenseManager
+{
+    public int shieldLevel = 0;
+    public bool shieldActive = false;
+    public DateTime shieldEndTime;
+
+    // بناء الدرع
+    public void BuildShield(int castleLevel, int gold, int wood)
+    {
+        if (castleLevel >= 7 && gold >= 2000 && wood >= 1000)
+        {
+            shieldLevel = 1;
+            shieldActive = true;
+            shieldEndTime = DateTime.Now.AddHours(6);
+            gold -= 2000;
+            wood -= 1000;
+            Console.WriteLine("Castle shield activated for 6h!");
+        }
+        else
+        {
+            Console.WriteLine("Cannot build shield.");
+        }
+    }
+
+    // ترقية الدرع
+    public void UpgradeShield(int gold, int wood)
+    {
+        if (gold >= 1000 && wood >= 500)
+        {
+            shieldLevel++;
+            shieldEndTime = shieldEndTime.AddHours(2);
+            gold -= 1000;
+            wood -= 500;
+            Console.WriteLine($"Shield upgraded to level {shieldLevel}!");
+        }
+    }
+
+    // التحقق من الدرع
+    public bool IsShieldActive()
+    {
+        if (shieldActive && DateTime.Now <= shieldEndTime)
+            return true;
+        shieldActive = false;
+        return false;
+    }
+
+    // Developer Mode: درع مستمر
+    public void ActivateShieldDev()
+    {
+        shieldActive = true;
+        shieldLevel = 10;
+        shieldEndTime = DateTime.Now.AddYears(1);
+        Console.WriteLine("[DevMode] Shield active indefinitely!");
+    }
+
+    // حدث غزو الشيطان
+    public void DemonInvasionEvent(string playerName)
+    {
+        Console.WriteLine($"[Event] Demon invasion on {playerName}!");
+    }
+}
